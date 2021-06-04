@@ -1,0 +1,39 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>今日の投稿数</th>
+      <th>前日の投稿数</th>
+      <th>前日比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= books.where(created_at: Date.today.all_day).count %></td>
+      <td><%= books.where(created_at: 1.day.ago.all_day).count %></td>
+      <% if books.where(created_at: 1.day.ago.all_day).count == 0 %>
+      <td><%= (books.where(created_at: Date.today.all_day).count.div(books.where(created_at: 1.day.ago.all_day).count + 1) * 100).to_s + "%" %></td>
+      <% else %>
+      <td><%= (books.where(created_at: Date.today.all_day).count.div(books.where(created_at: 1.day.ago.all_day).count) * 100).to_s + "%" %></td>
+      <% end %>
+    </tr>
+  </tbody>
+
+    <thead>
+    <tr>
+      <th>今週の投稿数</th>
+      <th>前週の投稿数</th>
+      <th>前週比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= books.where(created_at: Date.today.all_week).count %></td>
+      <td><%= books.where(created_at: 1.week.ago.all_week).count %></td>
+      <% if books.where(created_at: 1.week.ago.all_week).count == 0 %>
+      <td><%= (books.where(created_at: Date.today.all_week).count.div(books.where(created_at: 1.week.ago.all_week).count + 1) * 100).to_s + "%" %></td>
+      <% else %>
+      <td><%= (books.where(created_at: Date.today.all_week).count.div(books.where(created_at: 1.weekB.ago.all_week).count) * 100).to_s + "%" %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
